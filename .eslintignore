@@ -1,0 +1,6 @@
+# Note: This is a copy of the .gitignore,
+# with flow-typed added
+node_modules
+npm-debug.log
+build
+.DS_Store
