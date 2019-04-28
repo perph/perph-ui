@@ -24,6 +24,10 @@ build:
 test:
 	yarn run test
 
+## analyze bundle
+analyze:
+	yarn run analyze
+
 ## start storybook dashboard
 storybook:
 	yarn run storybook
