@@ -11,6 +11,8 @@ const {
 
 export interface IThemeInterface {
   primaryColor: string;
+  backgroundColor: string;
+  width: number;
 }
 
 export const theme = {
