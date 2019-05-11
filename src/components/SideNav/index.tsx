@@ -1,7 +1,5 @@
 import React from 'react';
 import { Menu, Icon, Switch, Button } from 'antd';
-import { ThemeContext } from 'theme';
-
 interface IExpandButton {
   expand: boolean;
   setExpand: Function;
