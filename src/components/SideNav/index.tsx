@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Menu, Icon, Switch, Button } from 'antd';
+import ThemeToggle from 'components/ThemeToggle';
+import { ThemeContext } from 'theme';
+import { SideNavWrapper } from './style';
 interface IExpandButton {
   expand: boolean;
   setExpand: Function;
@@ -18,41 +21,47 @@ const ExpandButton: React.FC<IExpandButton> = props => {
 };
 
 const ThemeWidget: React.FC = () => {
-  return <div>theme widget</div>;
+  return <ThemeToggle />;
 };
 interface ISideNav {}
 const SideNav: React.FC<ISideNav> = () => {
-  const [expand, setExpand] = React.useState(true);
+  const [expand, setExpand] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState('OVERVIEW');
+  const theme = useContext(ThemeContext);
   return (
-    <Menu
-      className="menu"
-      inlineCollapsed={expand}
-      // theme={this.state.theme}
-      // onClick={this.handleClick}
-      defaultOpenKeys={['sub1']}
-      // selectedKeys={[this.state.current]}
-      mode="inline"
-    >
-      <Menu.Item key="SUMMARY">
-        <Icon type="pie-chart" />
-        <span>Summary</span>
-      </Menu.Item>
-      <Menu.Item key="SECTORS">
-        <Icon type="desktop" />
-        <span>Sector Breakdown</span>
-      </Menu.Item>
-      <Menu.Item key="SEASONALITY">
-        <Icon type="inbox" />
-        <span>Seasonality</span>
-      </Menu.Item>
-      <Menu.Item key="ALERTS">
-        <Icon type="warning" />
-        <span>Alerts</span>
-      </Menu.Item>
-      <Menu.Item key="MOVERS">
-        <Icon type="line-chart" />
-        <span>Movers</span>
-      </Menu.Item>
-    </Menu>
+    <SideNavWrapper>
+      <Menu
+        className="menu"
+        inlineCollapsed={expand}
+        theme={theme.mode}
+        onClick={e => setCurrentMenu(e.key)}
+        defaultOpenKeys={['sub1']}
+        selectedKeys={[currentMenu]}
+        mode="inline"
+      >
+        <Menu.Item key="OVERVIEW">
+          <Icon type="pie-chart" />
+          <span>Overview</span>
+        </Menu.Item>
+        <Menu.Item key="MENU2">
+          <Icon type="desktop" />
+          <span>item 2n</span>
+        </Menu.Item>
+        <Menu.Item key="MENU3">
+          <Icon type="inbox" />
+          <span>item 3</span>
+        </Menu.Item>
+        <Menu.Item key="MENU4">
+          <Icon type="warning" />
+          <span>item 4</span>
+        </Menu.Item>
+        <Menu.Item key="MENU5">
+          <Icon type="line-chart" />
+          <span>item 5</span>
+        </Menu.Item>
+      </Menu>
+    </SideNavWrapper>
   );
 };
+
+export default SideNav;

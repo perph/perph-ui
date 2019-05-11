@@ -5,3 +5,6 @@ const Button = styled.button`
   border: none;
   color: white;
 `;
+export const SideNavWrapper = styled.div`
+  max-width: 140px;
+`;

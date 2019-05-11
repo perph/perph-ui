@@ -15,8 +15,16 @@ export interface IThemeInterface {
   backgroundColor: string;
   width: number;
 }
-const theme_light = {};
-const theme_dark = {};
+type ThemeMode = 'light' | 'dark';
+interface ITheme {
+  mode: ThemeMode;
+}
+let theme_light: ITheme = {
+  mode: 'light',
+};
+const theme_dark = {
+  mode: 'dark',
+};
 export const theme = {
   primaryColor: '#e9e9eb',
 };
