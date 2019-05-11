@@ -1,4 +1,5 @@
 import * as styledComponents from 'styled-components';
+import React from 'react';
 
 const {
   default: styled,
@@ -14,10 +15,17 @@ export interface IThemeInterface {
   backgroundColor: string;
   width: number;
 }
+const theme_light = {
 
+}
+const theme_dark = {
+
+}
 export const theme = {
   primaryColor: '#e9e9eb',
 };
 
+const ThemeContext = React.createContext(theme_light)
+
 export default styled;
-export { css, keyframes, ThemeProvider };
+export { css, keyframes, ThemeProvider, ThemeContext };
