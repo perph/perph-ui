@@ -1,10 +1,11 @@
 import React from 'react';
-import { ThemeContext} from 'theme';
+import { ThemeProvider } from 'theme';
 import logo from './logo.svg';
 import './App.css';
 
 const App: React.FC = () => {
   return (
+    <ThemeProvider>
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           </a>
         </header>
       </div>
+    </ThemeProvider>
   );
 };
 
