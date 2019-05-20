@@ -54,6 +54,7 @@ const ThemeProvider: React.FC = props => {
       setMode('dark');
     }
   };
+  
   return (
     <ThemeContext.Provider value={{ mode, theme, updateTheme }}>
       {props.children}

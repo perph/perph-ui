@@ -6,9 +6,9 @@ import Sun from 'assets/images/sun.png';
 import Moon from 'assets/images/moon.png';
 
 const ThemeToggle: React.FC = () => {
-  const [on, setOn] = useState(true);
+  const [on, setOn] = useState(false);
   const { updateTheme } = useContext(ThemeContext);
-  useEffect(() => updateTheme(on ? updateTheme('light') : updateTheme('dark')));
+  useEffect(() => (on ? updateTheme('light') : updateTheme('dark')));
   return (
     <Toggle
       icons={{

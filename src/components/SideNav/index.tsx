@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Menu, Icon, Switch, Button } from 'antd';
+import { Menu, Icon, Button } from 'antd';
 import ThemeToggle from 'components/ThemeToggle';
 import { ThemeContext } from 'theme';
 import {
@@ -33,7 +33,7 @@ interface ISideNav {}
 const SideNav: React.FC<ISideNav> = () => {
   const [expand, setExpand] = useState(true);
   const [currentMenu, setCurrentMenu] = useState('OVERVIEW');
-  const { mode, theme } = useContext(ThemeContext);
+  const { mode } = useContext(ThemeContext);
   console.log('mode:', mode);
   return (
     <SideNavWrapper expand={expand}>
