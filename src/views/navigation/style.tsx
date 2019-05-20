@@ -2,6 +2,7 @@ import styled from 'theme';
 
 export const NavigationWrapper = styled.div`
   display: grid;
+  height: 100%;
   background: ${props => props.theme.backgroundColor};
   grid-template-columns: 140px 1fr;
   grid-template-rows: 100px 1fr;
