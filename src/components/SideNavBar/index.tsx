@@ -1,35 +1,54 @@
 import React, { useState } from 'react';
-import { MenuWrapper } from './style';
+import { MenuWrapper, MenuItemWrapper, MenuItemTitle, MenuItemIcon } from './style';
 export interface IMenuItemProps {
-  title: string;
-  selected: string;
-  onClick: (k: string) => void;
+  value: string;
+  title?: string;
+  onClick?: () => void;
+  selected: boolean;
+  icon: string;
 }
 
 const MenuItem: React.FC<IMenuItemProps> = props => {
-  return <div>{props.title}</div>;
+  return (
+    <MenuItemWrapper selected={props.selected} onClick={props.onClick}>
+      <MenuItemTitle>{props.title}</MenuItemTitle>
+      <MenuItemIcon>{props.icon}</MenuItemIcon>
+    </MenuItemWrapper>
+  );
 };
 
-export interface IMenuProps {}
+export interface IMenuProps {
+  children: any;
+}
 
 const Menu: React.FC<IMenuProps> = props => {
-  return <MenuWrapper>{props.children}</MenuWrapper>;
+  const [selected, setSelected] = useState('');
+  return (
+    <MenuWrapper>
+      {React.Children.map(props.children, (child: React.ReactElement<any>) => {
+        return React.cloneElement(child, {
+          onClick: () => setSelected(child.props.value),
+          selected: selected === child.props.value,
+          title:
+            child.props.value
+              .toLowerCase()
+              .charAt(0)
+              .toUpperCase() + child.props.value.slice(1),
+        });
+      })}
+    </MenuWrapper>
+  );
 };
 
 export interface ISideNavBarProps {}
 
 const SideNavBar: React.FC<ISideNavBarProps> = props => {
-  const [selected, setSelected] = useState('');
   return (
     <Menu>
-      <MenuItem
-        key="ITEM1"
-        selected={selected}
-        onClick={k => setSelected(k)}
-        title={'ITEM1'}
-      />
-      <MenuItem key="ITEM2" title={'ITEM2'} />
-      <MenuItem key="ITEM2" title={'ITEM2'} />
+      <MenuItem value={'Overview'} />
+      <MenuItem value={'Management'} />
+      <MenuItem value={'Dashboards'} />
+      <MenuItem value={'Realtime'} />
     </Menu>
   );
 };
