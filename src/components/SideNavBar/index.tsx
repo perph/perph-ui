@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { MenuWrapper, MenuItemWrapper, MenuItemTitle, MenuItemIcon } from './style';
+import {
+  SideNavBarWrapper,
+  MenuWrapper,
+  MenuItemWrapper,
+  MenuItemTitle,
+  MenuItemIcon,
+  MenuItemContent,
+  MenuItemIndicator,
+  MenuItemIndicatorCenter,
+  MenuItemIndicatorTop,
+  MenuItemIndicatorBottom,
+} from './style';
 export interface IMenuItemProps {
   value: string;
   title?: string;
@@ -11,8 +22,15 @@ export interface IMenuItemProps {
 const MenuItem: React.FC<IMenuItemProps> = props => {
   return (
     <MenuItemWrapper selected={props.selected} onClick={props.onClick}>
-      <MenuItemTitle>{props.title}</MenuItemTitle>
-      <MenuItemIcon>{props.icon}</MenuItemIcon>
+      <MenuItemContent>
+        <MenuItemTitle>{props.title}</MenuItemTitle>
+        <MenuItemIcon>{props.icon}</MenuItemIcon>
+      </MenuItemContent>
+      <MenuItemIndicator selected={props.selected}>
+        <MenuItemIndicatorTop selected={props.selected} />
+        <MenuItemIndicatorCenter selected={props.selected} />
+        <MenuItemIndicatorBottom selected={props.selected} />
+      </MenuItemIndicator>
     </MenuItemWrapper>
   );
 };
@@ -44,12 +62,14 @@ export interface ISideNavBarProps {}
 
 const SideNavBar: React.FC<ISideNavBarProps> = props => {
   return (
-    <Menu>
-      <MenuItem value={'Overview'} />
-      <MenuItem value={'Management'} />
-      <MenuItem value={'Dashboards'} />
-      <MenuItem value={'Realtime'} />
-    </Menu>
+    <SideNavBarWrapper>
+      <Menu>
+        <MenuItem value={'Overview'} />
+        <MenuItem value={'Management'} />
+        <MenuItem value={'Dashboards'} />
+        <MenuItem value={'Realtime'} />
+      </Menu>
+    </SideNavBarWrapper>
   );
 };
 
