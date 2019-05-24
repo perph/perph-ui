@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Icon } from 'antd';
+import Logo from 'components/Logo';
+import ThemeToggle from 'components/ThemeToggle';
+import { ThemeContext } from 'theme';
 import {
   SideNavBarWrapper,
   MenuWrapper,
@@ -10,26 +14,32 @@ import {
   MenuItemIndicatorCenter,
   MenuItemIndicatorTop,
   MenuItemIndicatorBottom,
+  MenuLogoWrapper,
+  MenuThemeWrapper,
 } from './style';
 export interface IMenuItemProps {
   value: string;
   title?: string;
   onClick?: () => void;
-  selected: boolean;
+  selected?: boolean;
   icon: string;
 }
 
 const MenuItem: React.FC<IMenuItemProps> = props => {
+  const selected = props.selected || false;
+  const { theme } = useContext(ThemeContext);
   return (
-    <MenuItemWrapper selected={props.selected} onClick={props.onClick}>
+    <MenuItemWrapper theme={theme} selected={selected} onClick={props.onClick}>
       <MenuItemContent>
+        <MenuItemIcon>
+          <Icon type={props.icon} />
+        </MenuItemIcon>
         <MenuItemTitle>{props.title}</MenuItemTitle>
-        <MenuItemIcon>{props.icon}</MenuItemIcon>
       </MenuItemContent>
-      <MenuItemIndicator selected={props.selected}>
-        <MenuItemIndicatorTop selected={props.selected} />
-        <MenuItemIndicatorCenter selected={props.selected} />
-        <MenuItemIndicatorBottom selected={props.selected} />
+      <MenuItemIndicator theme={theme} selected={selected}>
+        <MenuItemIndicatorTop theme={theme} selected={selected} />
+        <MenuItemIndicatorCenter theme={theme} selected={selected} />
+        <MenuItemIndicatorBottom theme={theme} selected={selected} />
       </MenuItemIndicator>
     </MenuItemWrapper>
   );
@@ -61,13 +71,21 @@ const Menu: React.FC<IMenuProps> = props => {
 export interface ISideNavBarProps {}
 
 const SideNavBar: React.FC<ISideNavBarProps> = props => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <SideNavBarWrapper>
+    <SideNavBarWrapper theme={theme}>
+      <MenuLogoWrapper>
+        <Logo />
+      </MenuLogoWrapper>
+      <MenuThemeWrapper>
+        <ThemeToggle />
+      </MenuThemeWrapper>
       <Menu>
-        <MenuItem value={'Overview'} />
-        <MenuItem value={'Management'} />
-        <MenuItem value={'Dashboards'} />
-        <MenuItem value={'Realtime'} />
+        <MenuItem icon={'shop'} value={'Overview'} />
+        <MenuItem icon={'control'} value={'Management'} />
+        <MenuItem icon={'dashboard'} value={'Dashboards'} />
+        <MenuItem icon={'alert'} value={'Alerts'} />
+        <MenuItem icon={'experiment'} value={'Realtime'} />
       </Menu>
     </SideNavBarWrapper>
   );

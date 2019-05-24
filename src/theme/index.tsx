@@ -11,12 +11,26 @@ const {
 
 export interface IThemeInterface {
   primaryColor: string;
-  backgroundColor: string;
+  background: string;
   width: number;
+  navbarBackground: string;
+  navbarSelector: string;
+  navbarSelectedRow: string;
+  navbarSelectedIndicator: string;
+  color: string;
+  colorNavbarSelected: string;
+  colorNavbarUnselected: string;
 }
 export type ThemeMode = 'light' | 'dark';
-type ITheme = {
+export type ITheme = {
   background: string;
+  navbarBackground: string;
+  navbarSelectedRow: string;
+  navbarSelectedIndicator: string;
+  colorNavbarSelected: string;
+  colorNavbarUnselected: string;
+  primaryColor: string;
+  color: string;
 };
 interface IThemeProvider {
   mode: ThemeMode;
@@ -25,9 +39,24 @@ interface IThemeProvider {
 }
 let theme_light_styles: ITheme = {
   background: 'white',
+  navbarBackground: '#3325d8',
+  navbarSelectedRow: 'white',
+  colorNavbarSelected: 'black',
+  colorNavbarUnselected: 'white',
+  navbarSelectedIndicator: 'white',
+  primaryColor: 'black',
+  color: 'black',
 };
 let theme_dark_styles: ITheme = {
-  background: 'black',
+  background: '#0f1113',
+  navbarBackground: 'white',
+  navbarSelectedRow: '#0f1113',
+  colorNavbarSelected: 'white',
+  colorNavbarUnselected: 'black',
+  navbarSelectedIndicator: '#0f1113',
+
+  primaryColor: 'white',
+  color: 'white',
 };
 
 let initial_context: IThemeProvider = {
@@ -54,7 +83,7 @@ const ThemeProvider: React.FC = props => {
       setMode('dark');
     }
   };
-  
+
   return (
     <ThemeContext.Provider value={{ mode, theme, updateTheme }}>
       {props.children}

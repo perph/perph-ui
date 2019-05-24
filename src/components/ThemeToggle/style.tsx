@@ -116,3 +116,7 @@ export const SwitchInput = styled.input`
       inset 0px 0px 0px 3px #9c9c9c;
   }
 `
+
+export const ToggleWrapper = styled.div`
+  height: 24px;
+`;
