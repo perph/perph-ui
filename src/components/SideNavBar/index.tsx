@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Icon, Button } from 'antd';
 import Logo from 'components/Logo';
 import ThemeToggle from 'components/ThemeToggle';
@@ -24,25 +24,28 @@ export interface IMenuItemProps {
   onClick?: () => void;
   selected?: boolean;
   icon: string;
-  expanded: boolean;
+  expanded?: boolean;
 }
 
 const MenuItem: React.FC<IMenuItemProps> = props => {
-  const selected = props.selected || false;
+  const selected =
+    typeof props.selected !== 'undefined' ? props.selected : false;
+  const expanded =
+    typeof props.expanded !== 'undefined' ? props.expanded : true;
   const { theme } = useContext(ThemeContext);
   const title = props.expanded ? (
     <MenuItemTitle>{props.title}</MenuItemTitle>
   ) : null;
   return (
     <MenuItemWrapper
-      expanded={props.expanded}
+      expanded={expanded}
       theme={theme}
       selected={selected}
       onClick={props.onClick}
     >
-      <MenuItemContent>
-        <MenuItemIcon>
-          <Icon style={{ fontSize: 20 }} type={props.icon} />
+      <MenuItemContent expanded={expanded}>
+        <MenuItemIcon type={props.icon}>
+          {/* <Icon style={{ fontSize: 20 }} type={props.icon} /> */}
         </MenuItemIcon>
         {title}
       </MenuItemContent>
@@ -103,13 +106,30 @@ const Menu: React.FC<IMenuProps> = props => {
   );
 };
 
-export interface ISideNavBarProps {}
+export interface ISideNavBarProps {
+  onExpandChange?: (expanded: boolean) => void;
+  width?: number;
+  expanded?: boolean;
+  windowWidth: any;
+}
 
 const SideNavBar: React.FC<ISideNavBarProps> = props => {
   const { theme } = useContext(ThemeContext);
-  const [expanded, setExpanded] = useState(false);
+  const windowWidth = props.windowWidth || 1000;
+  const [expanded, setExpanded] = useState(true);
+  const disableExpand = windowWidth < 600;
+  const width = props.width ? `${expanded ? props.width : 70}px` : `100%`;
+  useEffect(() => {
+    if (props.onExpandChange) {
+      props.onExpandChange(expanded);
+    }
+    if (windowWidth < 600 && windowWidth > 1) {
+      setExpanded(false);
+    }
+  }, [windowWidth, props, expanded]);
+  console.log(expanded);
   return (
-    <SideNavBarWrapper width={expanded ? 150 : 70} theme={theme}>
+    <SideNavBarWrapper width={width} theme={theme}>
       <MenuLogoWrapper>
         <Logo expanded={expanded} />
       </MenuLogoWrapper>
@@ -117,7 +137,10 @@ const SideNavBar: React.FC<ISideNavBarProps> = props => {
         <ThemeToggle />
       </MenuThemeWrapper>
       <ExpandButtonWrapper>
-        <ExpandButton expanded={expanded} setExpanded={setExpanded} />
+        <ExpandButton
+          expanded={expanded}
+          setExpanded={disableExpand ? () => {} : setExpanded}
+        />
       </ExpandButtonWrapper>
       <Menu expanded={expanded}>
         <MenuItem icon={'shop'} value={'Overview'} />

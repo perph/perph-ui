@@ -1,9 +1,12 @@
 // import styled from 'styled-components';
 import styled, { ITheme } from 'theme';
+import { Icon } from 'antd';
 
 export const MenuWrapper = styled.div`
   width: 100%;
   grid-area: menu;
+  -webkit-transition: all 2s ease-in-out; /* For Safari 3.1 to 6.0 */
+  transition: all 2s ease-in-out;
 `;
 
 export const MenuThemeWrapper = styled.div`
@@ -19,11 +22,14 @@ export const MenuLogoWrapper = styled.div`
   justify-content: center;
 `;
 interface ISideNavWrapper {
-  width: number;
+  width: any;
 }
+
 export const SideNavBarWrapper = styled.div<ISideNavWrapper>`
   border-radius: 0 50px 0 0;
-  width: ${props => props.width}px;
+  width: ${props => props.width};
+  -webkit-transition: width 300ms ease-in-out; /* For Safari 3.1 to 6.0 */
+  transition: width 300ms ease-in-out;
   height: 100%;
   padding-top: 20px;
   background: ${props => props.theme.navbarBackground};
@@ -59,11 +65,12 @@ export const MenuItemWrapper = styled.div<IMenuItemWrapper>`
     props.selected
       ? props.theme.colorNavbarSelected
       : props.theme.colorNavbarUnselected};
-  margin-left: 5px;
+  margin: 3px 0 3px 5px;
+  padding: 3px 0 3px 0;
   border-radius: 30px 0 0 30px;
   display: grid;
   grid-template-areas: 'content indicator';
-  grid-template-columns: ${props => (props.expanded ? 5 : 2)}fr 1fr;
+  grid-template-columns: ${props => (props.expanded ? 5 : 3)}fr 1fr;
 `;
 
 interface IIndicator {
@@ -75,8 +82,8 @@ export const MenuItemIndicator = styled.div<IIndicator>`
   width: 100%;
   height: 50px;
   color: blue;
-  margin-top: -30px;
-  grid-template-rows: 30px 30px 30px;
+  margin-top: -33px;
+  grid-template-rows: 30px 36px 30px;
   grid-template-areas:
     'top'
     'center'
@@ -86,7 +93,7 @@ export const MenuItemIndicatorCenter = styled.div<IIndicator>`
   display: ${props => (props.selected ? `block` : `none`)};
   background: ${props => props.theme.navbarSelectedRow};
   width: 110%;
-  height: 85px;
+  height: 98px;
   grid-area: center;
   margin-top: -30px;
   z-index: 0;
@@ -95,9 +102,9 @@ export const MenuItemIndicatorTop = styled.div<IIndicator>`
   grid-area: top;
   display: ${props => (props.selected ? `block` : `none`)};
   background: ${props => props.theme.navbarBackground};
-  width: 105%;
+  width: 110%;
   height: 110%;
-  margin-left: -5%;
+  margin-left: -10%;
   margin-top: -3px;
   border-radius: 0 0 30px 0;
   z-index: 1;
@@ -106,32 +113,40 @@ export const MenuItemIndicatorBottom = styled.div<IIndicator>`
   grid-area: bottom;
   display: ${props => (props.selected ? `block` : `none`)};
   background: ${props => props.theme.navbarBackground};
-  width: 105%;
+  width: 110%;
   height: 110%;
-  margin-left: -5%;
-  margin-top: -5px;
+  margin-left: -10%;
   border-radius: 0 30px 0 0;
   z-index: 1;
 `;
 
-export const MenuItemContent = styled.div`
+interface IMenuItemContent {
+  expanded: boolean;
+}
+
+export const MenuItemContent = styled.div<IMenuItemContent>`
   grid-area: content;
   width: 100%;
   text-align: left;
-  margin-left: 7px;
+  margin-left: ${props => (props.expanded ? 14 : 5)}px;
   justify-content: center;
   align-items: center;
   display: flex;
-  height: 25px;
+  height: 100%;
 `;
 
 export const MenuItemTitle = styled.div`
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
   width: 100%;
   margin-left: 10px;
-  font-size: 10px;
+  font-size: 15px;
   font-family: 'Prompt', sans-serif;
 `;
 
-export const MenuItemIcon = styled.div`
-  width: 20px;
+export const MenuItemIcon = styled(Icon)`
+  width: 30px;
+  font-size: 30px;
 `;

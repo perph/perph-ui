@@ -1,18 +1,24 @@
-import * as React from 'react';
-import SideNav from 'components/SideNav';
+import React, { useState } from 'react';
+import useResizeObserver from 'hooks/useResizerObserver';
+import SideNavBar from 'components/SideNavBar';
 import TopNav from 'components/TopNav';
-
 import { NavigationWrapper, SideNavWrapper, TopNavWrapper } from './style';
-export interface INavigationProps {}
+interface INavigationProps {}
 
 function Navigation(props: INavigationProps) {
+  const [expanded, setExpanded] = useState(true);
+  const [ref, width] = useResizeObserver();
   return (
-    <NavigationWrapper>
+    <NavigationWrapper ref={ref} expanded={expanded}>
       <TopNavWrapper>
         <TopNav />
       </TopNavWrapper>
       <SideNavWrapper>
-        <SideNav />
+        <SideNavBar
+          windowWidth={width}
+          expanded={expanded}
+          onExpandChange={value => setExpanded(value)}
+        />
       </SideNavWrapper>
     </NavigationWrapper>
   );
