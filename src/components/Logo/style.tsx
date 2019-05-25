@@ -5,3 +5,8 @@ export const LogoWrapper = styled.img`
   height: 40px;
   margin: 10px;
 `;
+
+export const LogoLightWrapper = styled.img`
+  height: 50px;
+  width: 50px;
+`;
