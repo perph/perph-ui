@@ -17,8 +17,6 @@ export default function() {
       if (!Array.isArray(entries)) {
         return;
       }
-      // Since we only observe the one element, we don't need to loop over the
-      // array
       if (!entries.length) {
         return;
       }

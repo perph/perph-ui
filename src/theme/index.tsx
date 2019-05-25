@@ -54,7 +54,6 @@ let theme_dark_styles: ITheme = {
   colorNavbarSelected: 'white',
   colorNavbarUnselected: 'black',
   navbarSelectedIndicator: '#0f1113',
-
   primaryColor: 'white',
   color: 'white',
 };
@@ -74,7 +73,6 @@ const ThemeProvider: React.FC = props => {
   const [theme, setTheme] = useState(theme_light_styles);
   const [mode, setMode] = useState<ThemeMode>('light');
   const updateTheme = (mode: ThemeMode) => {
-    console.log('updating theme:', mode);
     if (mode === 'light') {
       setTheme(theme_light_styles);
       setMode('light');

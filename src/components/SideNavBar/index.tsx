@@ -33,9 +33,7 @@ const MenuItem: React.FC<IMenuItemProps> = props => {
   const expanded =
     typeof props.expanded !== 'undefined' ? props.expanded : true;
   const { theme } = useContext(ThemeContext);
-  const title = props.expanded ? (
-    <MenuItemTitle>{props.title}</MenuItemTitle>
-  ) : null;
+  const title = props.title || '';
   return (
     <MenuItemWrapper
       expanded={expanded}
@@ -44,10 +42,8 @@ const MenuItem: React.FC<IMenuItemProps> = props => {
       onClick={props.onClick}
     >
       <MenuItemContent expanded={expanded}>
-        <MenuItemIcon type={props.icon}>
-          {/* <Icon style={{ fontSize: 20 }} type={props.icon} /> */}
-        </MenuItemIcon>
-        {title}
+        <MenuItemIcon type={props.icon} />
+        <MenuItemTitle expanded={expanded}>{title}</MenuItemTitle>
       </MenuItemContent>
       <MenuItemIndicator theme={theme} selected={selected}>
         <MenuItemIndicatorTop theme={theme} selected={selected} />
@@ -127,7 +123,6 @@ const SideNavBar: React.FC<ISideNavBarProps> = props => {
       setExpanded(false);
     }
   }, [windowWidth, props, expanded]);
-  console.log(expanded);
   return (
     <SideNavBarWrapper width={width} theme={theme}>
       <MenuLogoWrapper>

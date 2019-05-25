@@ -5,8 +5,6 @@ import { Icon } from 'antd';
 export const MenuWrapper = styled.div`
   width: 100%;
   grid-area: menu;
-  -webkit-transition: all 2s ease-in-out; /* For Safari 3.1 to 6.0 */
-  transition: all 2s ease-in-out;
 `;
 
 export const MenuThemeWrapper = styled.div`
@@ -26,7 +24,7 @@ interface ISideNavWrapper {
 }
 
 export const SideNavBarWrapper = styled.div<ISideNavWrapper>`
-  border-radius: 0 50px 0 0;
+  border-radius: 0 50px 50px 0;
   width: ${props => props.width};
   -webkit-transition: width 300ms ease-in-out; /* For Safari 3.1 to 6.0 */
   transition: width 300ms ease-in-out;
@@ -108,6 +106,7 @@ export const MenuItemIndicatorTop = styled.div<IIndicator>`
   margin-top: -3px;
   border-radius: 0 0 30px 0;
   z-index: 1;
+  overflow: hidden;
 `;
 export const MenuItemIndicatorBottom = styled.div<IIndicator>`
   grid-area: bottom;
@@ -118,6 +117,7 @@ export const MenuItemIndicatorBottom = styled.div<IIndicator>`
   margin-left: -10%;
   border-radius: 0 30px 0 0;
   z-index: 1;
+  overflow: hidden;
 `;
 
 interface IMenuItemContent {
@@ -133,17 +133,22 @@ export const MenuItemContent = styled.div<IMenuItemContent>`
   align-items: center;
   display: flex;
   height: 100%;
+  overflow: hidden;
 `;
 
-export const MenuItemTitle = styled.div`
+export const MenuItemTitle = styled.div<IMenuItemContent>`
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
-  width: 100%;
+  display: ${props => (props.expanded ? `flex` : `none`)};
+  width: ${props => (props.expanded ? `100%` : `0px`)};
+  animation-delay: 0.2s;
+  transition: width 2000ms;
   margin-left: 10px;
   font-size: 15px;
   font-family: 'Prompt', sans-serif;
+  overflow: hidden;
 `;
 
 export const MenuItemIcon = styled(Icon)`
