@@ -107,6 +107,7 @@ export interface ISideNavBarProps {
   width?: number;
   expanded?: boolean;
   windowWidth: any;
+  sections: Array<any>;
 }
 
 const SideNavBar: React.FC<ISideNavBarProps> = props => {
@@ -115,6 +116,13 @@ const SideNavBar: React.FC<ISideNavBarProps> = props => {
   const [expanded, setExpanded] = useState(true);
   const disableExpand = windowWidth < 600;
   const width = props.width ? `${expanded ? props.width : 70}px` : `100%`;
+  const menuItems = props.sections.map((section, index) => (
+    <MenuItem
+      key={`${section.title}-index`}
+      icon={section.icon}
+      value={section.title}
+    />
+  ));
   useEffect(() => {
     if (props.onExpandChange) {
       props.onExpandChange(expanded);
@@ -137,13 +145,7 @@ const SideNavBar: React.FC<ISideNavBarProps> = props => {
           setExpanded={disableExpand ? () => {} : setExpanded}
         />
       </ExpandButtonWrapper>
-      <Menu expanded={expanded}>
-        <MenuItem icon={'shop'} value={'Overview'} />
-        <MenuItem icon={'control'} value={'Management'} />
-        <MenuItem icon={'dashboard'} value={'Dashboards'} />
-        <MenuItem icon={'alert'} value={'Alerts'} />
-        <MenuItem icon={'experiment'} value={'Realtime'} />
-      </Menu>
+      <Menu expanded={expanded}>{menuItems}</Menu>
     </SideNavBarWrapper>
   );
 };

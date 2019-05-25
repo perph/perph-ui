@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider, ThemeContext } from 'theme';
 import Navigation from 'views/navigation';
 import './App.css';
@@ -10,11 +11,13 @@ const AppManager: React.FC = props => {
 };
 const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <AppManager>
-        <Navigation />
-      </AppManager>
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider>
+        <AppManager>
+          <Navigation />
+        </AppManager>
+      </ThemeProvider>
+    </Router>
   );
 };
 
