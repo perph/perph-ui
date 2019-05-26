@@ -3,6 +3,8 @@ import 'antd/dist/antd.css'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { sections } from '../config'
 import ThemeToggle from '../components/ThemeToggle/index'
 import SideNavBar from '../components/SideNavBar/index'
 import SideNav from '../components/SideNav'
@@ -20,7 +22,9 @@ storiesOf('SideNavigation', module).add('SideNavigation', () => (
 ))
 storiesOf('SideNavBar', module).add('SideNavBar', () => (
   <ThemeProvider>
-    <SideNavBar width={200} />
+    <Router>
+      <SideNavBar sections={sections} width={200} />
+    </Router>
   </ThemeProvider>
 ))
 storiesOf('Button', module)

@@ -30,6 +30,7 @@ export const SideNavBarWrapper = styled.div<ISideNavWrapper>`
   transition: width 300ms ease-in-out;
   height: 100%;
   padding-top: 20px;
+  overflow: hidden;
   background: ${props => props.theme.navbarBackground};
   display: grid;
   color: ${props => props.theme.primaryColor};

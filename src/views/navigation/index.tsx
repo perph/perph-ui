@@ -24,7 +24,6 @@ interface INavigationProps {
 }
 
 function Navigation(props: INavigationProps) {
-  console.log(props.location);
   const [expanded, setExpanded] = useState(true);
   const [ref, width] = useResizeObserver();
   const { location } = props;
