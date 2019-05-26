@@ -1,27 +1,36 @@
-export const navItems = [
+const navItems = [
   {
     title: 'Overview',
-    uri: '/',
     icon: 'shop',
+    to: '/overview',
+    pathsActive: [/^\/overview\/(.*)/],
   },
   {
     title: 'Management',
-    uri: '/management',
     icon: 'control',
+    to: '/management',
+    pathsActive: [/^\/management\/(.*)/],
   },
   {
     title: 'Dashboards',
-    uri: '/dashboards',
+    to: '/dashboards',
+    pathsActive: [/^\/dashboards\/(.*)/],
     icon: 'dashboard',
   },
   {
     title: 'Alerts',
-    uri: '/alerts',
     icon: 'alert',
+    to: '/alerts',
+    pathsActive: [/^\/alerts\/(.*)/],
   },
   {
     title: 'Realtime',
-    uri: '/realtime',
     icon: 'experiment',
+    to: '/realtime',
+    pathsActive: [/^\/realtime\/(.*)/],
   },
 ];
+
+const defaultRoute = '/overview';
+
+export { defaultRoute, navItems };

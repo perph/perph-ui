@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Icon, Button } from 'antd';
+import { Link } from 'react-router-dom';
 import Logo from 'components/Logo';
 import ThemeToggle from 'components/ThemeToggle';
 import { ThemeContext } from 'theme';
@@ -24,6 +25,7 @@ export interface IMenuItemProps {
   onClick?: () => void;
   selected?: boolean;
   icon: string;
+  uri: string;
   expanded?: boolean;
 }
 
@@ -80,24 +82,35 @@ const ExpandButton: React.FC<IExpandButton> = props => {
 export interface IMenuProps {
   children: any;
   expanded: boolean;
+  onSelect: Function;
+  selected?: string;
 }
 
 const Menu: React.FC<IMenuProps> = props => {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(props.selected || '');
+  const handleSelect = (value: string) => {
+    setSelected(value);
+    if (props.onSelect) {
+      props.onSelect(value);
+    }
+  };
   return (
     <MenuWrapper>
       {React.Children.map(props.children, (child: React.ReactElement<any>) => {
-        return React.cloneElement(child, {
-          onClick: () => setSelected(child.props.value),
-          selected: selected === child.props.value,
-          expanded: props.expanded,
-          title:
-            child.props.value
-              .toLowerCase()
-              .charAt(0)
-              .toUpperCase() + child.props.value.slice(1),
-        });
-      })}
+        return <Link to={child.props.uri}>
+                {React.cloneElement(child, {
+                  onClick: () => handleSelect(child.props.value),
+                  selected: selected === child.props.value,
+                  expanded: props.expanded,
+                  title:
+                    child.props.value
+                      .toLowerCase()
+                      .charAt(0)
+                      .toUpperCase() + child.props.value.slice(1),
+                  })
+                }
+              </Link>;
+        })}
     </MenuWrapper>
   );
 };
@@ -108,6 +121,8 @@ export interface ISideNavBarProps {
   expanded?: boolean;
   windowWidth: any;
   sections: Array<any>;
+  onSelect: Function;
+  selected: string;
 }
 
 const SideNavBar: React.FC<ISideNavBarProps> = props => {
@@ -118,6 +133,7 @@ const SideNavBar: React.FC<ISideNavBarProps> = props => {
   const width = props.width ? `${expanded ? props.width : 70}px` : `100%`;
   const menuItems = props.sections.map((section, index) => (
     <MenuItem
+      uri={section.uri}
       key={`${section.title}-index`}
       icon={section.icon}
       value={section.title}
@@ -145,7 +161,13 @@ const SideNavBar: React.FC<ISideNavBarProps> = props => {
           setExpanded={disableExpand ? () => {} : setExpanded}
         />
       </ExpandButtonWrapper>
-      <Menu expanded={expanded}>{menuItems}</Menu>
+      <Menu
+        expanded={expanded}
+        selected={props.selected}
+        onSelect={props.onSelect}
+      >
+        {menuItems}
+      </Menu>
     </SideNavBarWrapper>
   );
 };
