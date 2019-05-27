@@ -1,0 +1,37 @@
+{
+  "name": "synthetic-job-example",
+  "properties": {
+    "host": "synthetic.perph.io",
+    "url": "/hello/world/1",
+
+    "port": 443,
+    "tls": {
+      "mode": "SIMPLE",
+      "verify": "true"
+    },
+    "trigger": "MANUAL",
+    "interval": "12345ms",
+    "users": "1000",
+    "samplesize": "3",
+    "payload": {
+      "example": "payload",
+      "with": {
+        "some": {
+          "yucky": [
+            "list",
+            "content",
+            "that",
+            "doesnt",
+            "seem",
+            2,
+            "end"
+          ]
+        },
+        "other": "peers",
+        "even": {
+          "more": "wow"
+        }
+      }
+    }
+  }
+}

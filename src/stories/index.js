@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { sections } from '../config'
 import ThemeToggle from '../components/ThemeToggle/index'
 import SideNavBar from '../components/SideNavBar/index'
-import SideNav from '../components/SideNav'
+import ManagementItem from '../components/ManagementItem'
 import { ThemeProvider } from '../theme'
 import { Button, Welcome } from '@storybook/react/demo'
 
@@ -15,16 +15,16 @@ storiesOf('Welcome', module).add('to Storybook', () => (
   <Welcome showApp={linkTo('Button')} />
 ))
 storiesOf('ThemeToggle', module).add('ThemeToggle', () => <ThemeToggle />)
-storiesOf('SideNavigation', module).add('SideNavigation', () => (
-  <ThemeProvider>
-    <SideNav />
-  </ThemeProvider>
-))
 storiesOf('SideNavBar', module).add('SideNavBar', () => (
   <ThemeProvider>
     <Router>
       <SideNavBar sections={sections} width={200} />
     </Router>
+  </ThemeProvider>
+))
+storiesOf('ManagementItem', module).add('Light', () => (
+  <ThemeProvider>
+      <ManagementItem />
   </ThemeProvider>
 ))
 storiesOf('Button', module)

@@ -1,0 +1,51 @@
+{
+  "name": "synthetic-job-example",
+  "metadata": {
+    "labels": [
+      "example",
+      "job",
+      "scan"
+    ],
+    "colors": [
+      "red"
+    ],
+    "owner": "admin"
+  },
+  "properties": {
+    "host": "synthetic.perph.io",
+    "url": "/hello/world/1",
+    "follow": "true",
+    "port": 443,
+    "tls": {
+      "mode": "SIMPLE",
+      "verify": "true"
+    },
+    "interval": "12345ms",
+    "samplesize": "3",
+    "authentication": {
+      "mode": "BASIC",
+      "username": "synth",
+      "password": "pass"
+    },
+    "payload": {
+      "example": "payload",
+      "with": {
+        "some": {
+          "yucky": [
+            "list",
+            "content",
+            "that",
+            "doesnt",
+            "seem",
+            2,
+            "end"
+          ]
+        },
+        "other": "peers",
+        "even": {
+          "more": "wow"
+        }
+      }
+    }
+  }
+}
