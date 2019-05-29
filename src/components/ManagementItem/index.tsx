@@ -1,5 +1,6 @@
 import React from 'react';
-import { ManagementItemWrapper } from './style';
+import { ManagementItemWrapper, SyntheticRowWrapper, HeaderRowWrapper } from './style';
+import { Synthetic } from 'api/models/synthetic';
 
 /*
 ManagementItem
@@ -32,30 +33,39 @@ The solution will need to subscribed to a shared state, where this state is mana
 [1] https://medium.com/crowdbotics/how-to-use-usereducer-in-react-hooks-for-performance-optimization-ecafca9e7bf5
 [2] https://github.com/diegohaz/constate
 */
-interface SyntheticRow {
-
+let SYNTHETIC = 'SYNTHETIC';
+let PERFORMANCE = 'PERFORMANCE';
+let rowConfiguration = {
+  synthetic: {
+    type: SYNTHETIC
+  },
+  performance: {
+    type: PERFORMANCE
+  }
 }
-interface PerformanceRow {
-
+type rowType = "SYNTHETIC" | "PERFORMANCE";
+interface IRenderWrapper {
+  children: React.ReactNode;
+  type: rowType;
 }
-interface AlertRow {
+const _renderWrapper: React.SFC<IRenderWrapper> = (props) => {
+  switch (props.type) {
+    case SYNTHETIC:
+      return <SyntheticRowWrapper>{props.children}</SyntheticRowWrapper>;
+    default:
+      return <HeaderRowWrapper>{props.children}</HeaderRowWrapper>
+  }
+};
 
-}
-interface ResourceRow {
-
-}
-interface StatusRow {
-
-}
 export interface IManagementItemProps {
+  type: undefined | Synthetic;
 }
 
-const ManagementItem: React.FC<IManagementItemProps> = (props) => {
-    return (
-      <ManagementItemWrapper>
-        Management Item goes here
-      </ManagementItemWrapper>
-    );
-}
+const ManagementItem: React.FC<IManagementItemProps> = props => {
+  const row = _renderRow(type, data)
+  return (
+    {_renderWrapper(row)}
+  );
+};
 
 export default ManagementItem;
