@@ -1,13 +1,14 @@
 {
   "name": "synthetic-job-example",
   "properties": {
-    "host": "synthetic.perph.io",
-    "url": "/hello/world/1",
-
-    "port": 443,
-    "tls": {
-      "mode": "SIMPLE",
-      "verify": "true"
+    "target": {
+      "host": "synthetic.perph.io",
+      "url": "/hello/world/1",
+      "port": 443,
+      "tls": {
+        "mode": "SIMPLE",
+        "verify": "true"
+      }
     },
     "trigger": "MANUAL",
     "interval": "12345ms",

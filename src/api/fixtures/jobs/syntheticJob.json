@@ -1,0 +1,49 @@
+{
+  "_id": "34awefr2342",
+  "metadata": {
+    "labels": [
+      { "value": "example", "color": "red"},
+      { "value": "job", "color": "blue"},
+      {"value": "scan", "color": "gray"}
+    ],
+    "owner": "admin",
+    "name": "synthetic-job-example"
+  },
+  "interval": "12345ms",
+  "samplesize": "3",
+  "target": {
+    "host": "synthetic.perph.io",
+    "url": "/hello/world/1",
+    "follow": "true",
+    "port": 443
+  },
+  "tls": {
+    "mode": "SIMPLE",
+    "verify": "true"
+  },
+  "authentication": {
+    "mode": "BASIC",
+    "username": "synth",
+    "password": "pass"
+  },
+  "payload": {
+    "example": "payload",
+    "with": {
+      "some": {
+        "yucky": [
+          "list",
+          "content",
+          "that",
+          "doesnt",
+          "seem",
+          2,
+          "end"
+        ]
+      },
+      "other": "peers",
+      "even": {
+        "more": "wow"
+      }
+    }
+  }
+}
