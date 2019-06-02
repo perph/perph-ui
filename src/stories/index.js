@@ -3,7 +3,9 @@ import 'antd/dist/antd.css'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
+import { withInfo } from '@storybook/addon-info'
 import { BrowserRouter as Router } from 'react-router-dom'
+import syntheticJob from '../api/fixtures/jobs/syntheticJob.json'
 import { sections } from '../config'
 import ThemeToggle from '../components/ThemeToggle/index'
 import SideNavBar from '../components/SideNavBar/index'
@@ -22,11 +24,26 @@ storiesOf('SideNavBar', module).add('SideNavBar', () => (
     </Router>
   </ThemeProvider>
 ))
-storiesOf('ManagementItem', module).add('Light', () => (
-  <ThemeProvider>
-      <ManagementItem />
-  </ThemeProvider>
-))
+storiesOf('ManagementItem', module)
+  .addDecorator(withInfo)
+  .add('SyntheticHeader', () => (
+    <ThemeProvider>
+      <ManagementItem type={'SYNTHETIC'} />
+    </ThemeProvider>
+  ))
+storiesOf('ManagementItem', module)
+  .addDecorator(withInfo)
+  .add(
+    'SyntheticRow',
+    () => (
+      <ThemeProvider>
+        <ManagementItem type={'SYNTHETIC'} data={syntheticJob} />
+      </ThemeProvider>
+    ),
+    {
+      info: { text: `data: ${syntheticJob}` }
+    }
+  )
 storiesOf('Button', module)
   .add('with text', () => (
     <Button onClick={action('clicked')}>Hello Button</Button>

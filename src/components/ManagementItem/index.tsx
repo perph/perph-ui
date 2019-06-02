@@ -1,5 +1,15 @@
 import React from 'react';
-import { ManagementItemWrapper, SyntheticRowWrapper, HeaderRowWrapper } from './style';
+import {
+  ManagementItemWrapper,
+  SyntheticRowWrapper,
+  HeaderRowWrapper,
+  ManagementItemLabels,
+  ManagementItemName,
+  ManagementItemHost,
+  SyntheticRowHeader,
+  ManagementItemURL,
+  LabelWrapper,
+} from './style';
 import { Synthetic } from 'api/models/synthetic';
 
 /*
@@ -37,35 +47,53 @@ let SYNTHETIC = 'SYNTHETIC';
 let PERFORMANCE = 'PERFORMANCE';
 let rowConfiguration = {
   synthetic: {
-    type: SYNTHETIC
+    type: SYNTHETIC,
   },
   performance: {
-    type: PERFORMANCE
-  }
+    type: PERFORMANCE,
+  },
+};
+interface ILabels {
+  labels: Array<any>;
 }
-type rowType = "SYNTHETIC" | "PERFORMANCE";
-interface IRenderWrapper {
-  children: React.ReactNode;
+const Labels: React.FC<ILabels> = ({ labels }) => (
+  <ManagementItemLabels>
+    {labels.map(label => (
+      <LabelWrapper color={label.color}>{label.value}</LabelWrapper>
+    ))}
+  </ManagementItemLabels>
+);
+type rowType = 'SYNTHETIC' | 'PERFORMANCE';
+interface IRow {
   type: rowType;
+  data?: undefined | Synthetic;
 }
-const _renderWrapper: React.SFC<IRenderWrapper> = (props) => {
+const Row: React.SFC<IRow> = props => {
+  const { data } = props;
   switch (props.type) {
     case SYNTHETIC:
-      return <SyntheticRowWrapper>{props.children}</SyntheticRowWrapper>;
+      return data ? (
+        <SyntheticRowWrapper>
+          <ManagementItemName>{data.metadata.name}</ManagementItemName>
+          <ManagementItemHost>{data.target.host}</ManagementItemHost>
+          <ManagementItemURL>{data.target.uri}</ManagementItemURL>
+          <Labels labels={data.metadata.labels} />
+        </SyntheticRowWrapper>
+      ) : (
+        <SyntheticRowHeader>header goes here</SyntheticRowHeader>
+      );
     default:
-      return <HeaderRowWrapper>{props.children}</HeaderRowWrapper>
+      return <HeaderRowWrapper />;
   }
 };
 
-export interface IManagementItemProps {
-  type: undefined | Synthetic;
+interface IManagementItem {
+  type: rowType;
+  data?: undefined | Synthetic;
 }
 
-const ManagementItem: React.FC<IManagementItemProps> = props => {
-  const row = _renderRow(type, data)
-  return (
-    {_renderWrapper(row)}
-  );
+const ManagementItem: React.FC<IManagementItem> = props => {
+  return <Row type={props.type} data={props.data} />;
 };
 
 export default ManagementItem;
