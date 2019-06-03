@@ -1,5 +1,5 @@
 export type Target = {
   host: string;
-  uri: string;
+  url: string;
   port: number;
-}
+};

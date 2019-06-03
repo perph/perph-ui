@@ -9,6 +9,7 @@ import {
   SyntheticRowHeader,
   ManagementItemURL,
   LabelWrapper,
+  P,
 } from './style';
 import { Synthetic } from 'api/models/synthetic';
 
@@ -44,22 +45,24 @@ The solution will need to subscribed to a shared state, where this state is mana
 [2] https://github.com/diegohaz/constate
 */
 let SYNTHETIC = 'SYNTHETIC';
-let PERFORMANCE = 'PERFORMANCE';
-let rowConfiguration = {
-  synthetic: {
-    type: SYNTHETIC,
-  },
-  performance: {
-    type: PERFORMANCE,
-  },
-};
+// let PERFORMANCE = 'PERFORMANCE';
+// let rowConfiguration = {
+//   synthetic: {
+//     type: SYNTHETIC,
+//   },
+//   performance: {
+//     type: PERFORMANCE,
+//   },
+// };
 interface ILabels {
   labels: Array<any>;
 }
 const Labels: React.FC<ILabels> = ({ labels }) => (
   <ManagementItemLabels>
-    {labels.map(label => (
-      <LabelWrapper color={label.color}>{label.value}</LabelWrapper>
+    {labels.map((label, index) => (
+      <LabelWrapper key={`${label.value}-${index}`} color={label.color}>
+        {label.value}
+      </LabelWrapper>
     ))}
   </ManagementItemLabels>
 );
@@ -74,9 +77,15 @@ const Row: React.SFC<IRow> = props => {
     case SYNTHETIC:
       return data ? (
         <SyntheticRowWrapper>
-          <ManagementItemName>{data.metadata.name}</ManagementItemName>
-          <ManagementItemHost>{data.target.host}</ManagementItemHost>
-          <ManagementItemURL>{data.target.uri}</ManagementItemURL>
+          <ManagementItemName>
+            <P>{data.metadata.name}</P>
+          </ManagementItemName>
+          <ManagementItemHost>
+            <P>{data.target.host}</P>
+          </ManagementItemHost>
+          <ManagementItemURL>
+            <P>{data.target.url}</P>
+          </ManagementItemURL>
           <Labels labels={data.metadata.labels} />
         </SyntheticRowWrapper>
       ) : (
@@ -93,7 +102,11 @@ interface IManagementItem {
 }
 
 const ManagementItem: React.FC<IManagementItem> = props => {
-  return <Row type={props.type} data={props.data} />;
+  return (
+    <ManagementItemWrapper>
+      <Row type={props.type} data={props.data} />
+    </ManagementItemWrapper>
+  );
 };
 
 export default ManagementItem;
