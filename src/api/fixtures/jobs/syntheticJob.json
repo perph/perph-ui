@@ -7,6 +7,7 @@
       {"value": "scan", "color": "gray"}
     ],
     "owner": "admin",
+    "type": "SYNTHETIC",
     "name": "synthetic-job-example"
   },
   "interval": "12345ms",
