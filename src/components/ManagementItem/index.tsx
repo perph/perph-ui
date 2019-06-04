@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from 'antd';
 import {
   ManagementItemWrapper,
   SyntheticRowWrapper,
@@ -88,7 +89,7 @@ const Row: React.SFC<IRow> = props => {
             <P>{data.target.url}</P>
           </ManagementItemURL>
           <Labels labels={data.metadata.labels} />
-          <ManagementItemOptions>A,B</ManagementItemOptions>
+          <ManagementItemOptions><Icon type="edit" /><Icon type="delete" /></ManagementItemOptions>
         </SyntheticRowWrapper>
       ) : (
         <SyntheticRowHeader>header goes here</SyntheticRowHeader>

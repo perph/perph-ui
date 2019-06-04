@@ -92,6 +92,11 @@ export const ManagementItemLabels = styled.div`
 `;
 export const ManagementItemOptions = styled.div`
   grid-area: options;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 `;
 export const ManagementItemLargeColumn = styled.div``;
 
