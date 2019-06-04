@@ -9,6 +9,7 @@ import {
   SyntheticRowHeader,
   ManagementItemURL,
   LabelWrapper,
+  ManagementItemOptions,
   P,
 } from './style';
 import { Synthetic } from 'api/models/synthetic';
@@ -87,6 +88,7 @@ const Row: React.SFC<IRow> = props => {
             <P>{data.target.url}</P>
           </ManagementItemURL>
           <Labels labels={data.metadata.labels} />
+          <ManagementItemOptions>A,B</ManagementItemOptions>
         </SyntheticRowWrapper>
       ) : (
         <SyntheticRowHeader>header goes here</SyntheticRowHeader>

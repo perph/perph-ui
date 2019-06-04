@@ -13,7 +13,7 @@ export const ManagementItemWrapper = styled.div`
   margin: 5px 0 5px 0;
   padding: 5px;
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     transition-duration: 0.1s;
   }
 `;

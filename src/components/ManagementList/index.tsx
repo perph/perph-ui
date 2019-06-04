@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Synthetic } from 'api/models/synthetic';
-import { ManagementListWrapper } from './style';
+import { ManagementListWrapper, UtilityBarWrapper, ListContent } from './style';
 import ManagementItem from 'components/ManagementItem';
 type rowType = 'SYNTHETIC' | 'PERFORMANCE';
 export interface IManagementListProps {
@@ -18,5 +18,9 @@ export function ManagementList(props: IManagementListProps) {
         />
       ))
     : null;
-  return <ManagementListWrapper>{items}</ManagementListWrapper>;
+  return <ManagementListWrapper>
+    <UtilityBarWrapper>utilityBarGoesHere</UtilityBarWrapper>
+  <ListContent>{items}</ListContent></ManagementListWrapper>;
 }
+
+export default ManagementList;

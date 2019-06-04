@@ -6,13 +6,23 @@ import { linkTo } from '@storybook/addon-links'
 import { withInfo } from '@storybook/addon-info'
 import { BrowserRouter as Router } from 'react-router-dom'
 import syntheticJob from '../api/fixtures/jobs/syntheticJob.json'
+
 import { sections } from '../config'
 import ThemeToggle from '../components/ThemeToggle/index'
 import SideNavBar from '../components/SideNavBar/index'
 import ManagementItem from '../components/ManagementItem'
+import ManagementList from '../components/ManagementList'
 import { ThemeProvider } from '../theme'
 import { Button, Welcome } from '@storybook/react/demo'
 
+const syntheticList = [
+  syntheticJob,
+  syntheticJob,
+  syntheticJob,
+  syntheticJob,
+  syntheticJob,
+  syntheticJob
+]
 storiesOf('Welcome', module).add('to Storybook', () => (
   <Welcome showApp={linkTo('Button')} />
 ))
@@ -44,6 +54,13 @@ storiesOf('ManagementItem', module)
       info: { text: `data: ${syntheticJob}` }
     }
   )
+storiesOf('ManagementList', module)
+  .addDecorator(withInfo)
+  .add('Synthetics', () => (
+    <ThemeProvider>
+      <ManagementList type={'SYNTHETIC'} items={syntheticList} />
+    </ThemeProvider>
+  ))
 storiesOf('Button', module)
   .add('with text', () => (
     <Button onClick={action('clicked')}>Hello Button</Button>
