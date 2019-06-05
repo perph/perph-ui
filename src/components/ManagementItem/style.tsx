@@ -41,9 +41,6 @@ export const ManagementItemName = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
 `;
 export const ManagementItemHost = styled.div`
   grid-area: host;
@@ -51,7 +48,8 @@ export const ManagementItemHost = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   &:after {
     content: '';
     width: 2px;
@@ -62,10 +60,10 @@ export const ManagementItemHost = styled.div`
 export const P = styled.p`
   width: 100%;
   margin: 0 4px 0 4px;
-  display: block;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  flex: 1;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const ManagementItemURL = styled.div`
   grid-area: url;
@@ -73,7 +71,8 @@ export const ManagementItemURL = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 
   &:after {
     content: '';
@@ -97,6 +96,16 @@ export const ManagementItemOptions = styled.div`
   justify-content: center;
   align-items: center;
   justify-items: center;
+  display: grid;
+  grid-template-areas:
+    'edit'
+    'delete';
+`;
+export const ManagementItemOptionsDelete = styled.div`
+  grid-area: delete;
+`;
+export const ManagementItemOptionsEdit = styled.div`
+  grid-area: edit;
 `;
 export const ManagementItemLargeColumn = styled.div``;
 

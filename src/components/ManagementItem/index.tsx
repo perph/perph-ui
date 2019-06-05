@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
+import Button from 'components/Button';
 import {
   ManagementItemWrapper,
   SyntheticRowWrapper,
@@ -89,7 +89,20 @@ const Row: React.SFC<IRow> = props => {
             <P>{data.target.url}</P>
           </ManagementItemURL>
           <Labels labels={data.metadata.labels} />
-          <ManagementItemOptions><Icon type="edit" /><Icon type="delete" /></ManagementItemOptions>
+          <ManagementItemOptions>
+            <Button
+              hoverColor="blue"
+              gridarea="edit"
+              type="edit"
+              color="black"
+            />
+            <Button
+              hoverColor="red"
+              gridarea="delete"
+              type="delete"
+              color="black"
+            />
+          </ManagementItemOptions>
         </SyntheticRowWrapper>
       ) : (
         <SyntheticRowHeader>header goes here</SyntheticRowHeader>
