@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'components/Button';
+import { Checkbox } from 'antd';
+import ManagementListStore from 'components/ManagementList/context';
 import {
   ManagementItemWrapper,
   SyntheticRowWrapper,
@@ -11,6 +13,7 @@ import {
   ManagementItemURL,
   LabelWrapper,
   ManagementItemOptions,
+  ManagementItemSelected,
   P,
 } from './style';
 import { Synthetic } from 'api/models/synthetic';
@@ -48,14 +51,40 @@ The solution will need to subscribed to a shared state, where this state is mana
 */
 let SYNTHETIC = 'SYNTHETIC';
 // let PERFORMANCE = 'PERFORMANCE';
-// let rowConfiguration = {
-//   synthetic: {
-//     type: SYNTHETIC,
-//   },
-//   performance: {
-//     type: PERFORMANCE,
-//   },
-// };
+let rowConfiguration = {
+  SYNTHETIC: {
+    layout: {
+      order: ['selected', 'name', 'host', 'url', 'labels', 'options'],
+      selected: {
+        width: '40px',
+      },
+      name: {
+        width: '1fr',
+      },
+      host: {
+        width: '2fr',
+      },
+      url: {
+        width: '1fr',
+      },
+      labels: {
+        width: '1fr',
+      },
+      options: {
+        width: '50px',
+      },
+    },
+  },
+  // PERFORMANCE: {},
+};
+const getRowLayout = (type: string, rowConfiguration: any) => {
+  return rowConfiguration[type].layout.order
+    .reduce((acc: Array<string>, item: any) => {
+      acc.push(rowConfiguration[type].layout[item].width);
+      return acc;
+    }, [])
+    .join(' ');
+};
 interface ILabels {
   labels: Array<any>;
 }
@@ -74,11 +103,17 @@ interface IRow {
   data?: undefined | Synthetic;
 }
 const Row: React.SFC<IRow> = props => {
-  const { data } = props;
-  switch (props.type) {
+  const { data, type } = props;
+  const { state, dispatch } = useContext(ManagementListStore);
+  switch (type) {
     case SYNTHETIC:
       return data ? (
-        <SyntheticRowWrapper>
+        <SyntheticRowWrapper
+          columnLayout={getRowLayout(type, rowConfiguration)}
+        >
+          <ManagementItemSelected>
+            <Checkbox onChange={() => dispatch({ type: 'TOGGLE_SELECTED', payload: { _id: data._id }})} />
+          </ManagementItemSelected>
           <ManagementItemName>
             <P>{data.metadata.name}</P>
           </ManagementItemName>

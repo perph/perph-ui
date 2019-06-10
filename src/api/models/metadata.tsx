@@ -1,4 +1,3 @@
-
 export type Label = {
   value: string;
   color: string;

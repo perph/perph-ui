@@ -17,10 +17,15 @@ export const ManagementItemWrapper = styled.div`
     transition-duration: 0.1s;
   }
 `;
-export const SyntheticRowWrapper = styled.div`
+interface ISyntheticRowWrapper {
+  columnLayout: string;
+}
+export const SyntheticRowWrapper = styled.div<ISyntheticRowWrapper>`
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 50px;
-  grid-template-areas: 'name host url labels options';
+  grid-template-columns: ${props => props.columnLayout};
+  grid-template-areas: 'selected name host url labels options';
+  column-width: 150px;
+  column-gap: 10px;
 `;
 export const SyntheticRowHeader = styled.div`
   display: grid;
@@ -101,6 +106,15 @@ export const ManagementItemOptions = styled.div`
     'edit'
     'delete';
 `;
+export const ManagementItemSelected = styled.div`
+  grid-area: selected;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex: 1;
+`;
+
 export const ManagementItemOptionsDelete = styled.div`
   grid-area: delete;
 `;
