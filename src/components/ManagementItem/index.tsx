@@ -105,6 +105,7 @@ interface IRow {
 const Row: React.SFC<IRow> = props => {
   const { data, type } = props;
   const { state, dispatch } = useContext(ManagementListStore);
+  console.log('Row:', state);
   switch (type) {
     case SYNTHETIC:
       return data ? (
@@ -112,7 +113,14 @@ const Row: React.SFC<IRow> = props => {
           columnLayout={getRowLayout(type, rowConfiguration)}
         >
           <ManagementItemSelected>
-            <Checkbox onChange={() => dispatch({ type: 'TOGGLE_SELECTED', payload: { _id: data._id }})} />
+            <Checkbox
+              onChange={() =>
+                dispatch({
+                  type: 'TOGGLE_SELECTED',
+                  payload: data._id,
+                })
+              }
+            />
           </ManagementItemSelected>
           <ManagementItemName>
             <P>{data.metadata.name}</P>

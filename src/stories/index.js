@@ -12,6 +12,7 @@ import ThemeToggle from '../components/ThemeToggle/index'
 import SideNavBar from '../components/SideNavBar/index'
 import ManagementItem from '../components/ManagementItem'
 import ManagementList from '../components/ManagementList'
+import UtilityBar from '../components/UtilityBar'
 import { ThemeProvider } from '../theme'
 import { Button, Welcome } from '@storybook/react/demo'
 
@@ -34,6 +35,12 @@ storiesOf('SideNavBar', module).add('SideNavBar', () => (
     </Router>
   </ThemeProvider>
 ))
+storiesOf('UtilityBar', module)
+  .add('unselected', () => (
+    <ThemeProvider>
+      <UtilityBar />
+    </ThemeProvider>
+  ))
 storiesOf('ManagementItem', module)
   .addDecorator(withInfo)
   .add('SyntheticHeader', () => (

@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import { Synthetic } from 'api/models/synthetic';
+import UtilityBar from 'components/UtilityBar';
 import { ManagementListWrapper, UtilityBarWrapper, ListContent } from './style';
 import ManagementListStore from './context';
 import ManagementItem from 'components/ManagementItem';
@@ -62,7 +63,10 @@ const managementListReducer = (state: any, action: any) => {
   }
 };
 
-export interface IManagementListProps {
+interface IManagementListUtilityBar {
+
+}
+interface IManagementListProps {
   items?: Array<Synthetic | undefined>;
   type: rowType;
 }
@@ -86,7 +90,7 @@ export function ManagementList(props: IManagementListProps) {
   return (
     <ManagementListStore.Provider value={{ state, dispatch }}>
       <ManagementListWrapper>
-        <UtilityBarWrapper>utilityBarGoesHere</UtilityBarWrapper>
+        <UtilityBarWrapper><UtilityBar /></UtilityBarWrapper>
         <ListContent>{items}</ListContent>
       </ManagementListWrapper>
     </ManagementListStore.Provider>
