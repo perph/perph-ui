@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+import Button from 'components/Button';
 import {
   UtilityBarWrapper,
   DisableButtonWrapper,
@@ -16,8 +18,12 @@ const UtilityBar: React.FC<IUtilityBarProps> = props => {
       <DisableButtonWrapper>disable</DisableButtonWrapper>
       <DeleteButtonWrapper>delete</DeleteButtonWrapper>
       <InformationWrapper>information</InformationWrapper>
-      <FilterButtonWrapper>filter</FilterButtonWrapper>
-      <AddButtonWrapper>add</AddButtonWrapper>
+      <FilterButtonWrapper>
+        <Button type="control" style={{ fontSize: 25 }} />
+      </FilterButtonWrapper>
+      <AddButtonWrapper>
+        <Button type="plus" style={{ 'stroke-width': '10px' }} />
+      </AddButtonWrapper>
     </UtilityBarWrapper>
   );
 };
