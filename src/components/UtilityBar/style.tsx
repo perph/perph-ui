@@ -45,13 +45,25 @@ export const FilterButtonWrapper = styled.div`
   justify-content: center;
   margin-left: 10px;
 `;
-export const AddButtonWrapper = styled.div`
+
+interface IAddButtonWrapper {
+  selected: boolean;
+}
+export const AddButtonWrapper = styled.div<IAddButtonWrapper>`
   width: 30px;
   height: 30px;
-  background: red;
+  background: #4caf50;
   align-items: center;
   display: flex;
   justify-content: center;
   margin-left: 10px;
   margin-right: 20px;
+  margin-bottom: ${({ selected }) => (selected ? `5px` : 0)};
+  ${({ selected }) =>
+    selected &&
+    `
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(232, 232, 232, 1);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(232, 232, 232, 1);
+    box-shadow: 0px 2px 5px 0px rgba(232, 232, 232, 1);
+  `}
 `;

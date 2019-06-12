@@ -6,10 +6,10 @@ import { ButtonWrapper } from './style';
 interface IButtonProps {
   onClick?: () => void;
   type: string;
-  style: any;
+  style?: any;
   color?: string;
   hoverColor?: string;
-  fontSize?: string;
+  fontSize?: number;
   gridarea?: string;
   hoveredEnabled?: undefined | boolean | string;
 }
@@ -20,7 +20,7 @@ const Button: React.FunctionComponent<IButtonProps> = props => {
   const type = props.type;
   const { hoveredEnabled } = props;
   const hoverColor = props.hoverColor || color;
-  const fontSize = props.fontSize || 28;
+  const fontSize = props.fontSize || 16;
   const style = hovered
     ? { ...props.style, color: hoverColor, fontSize }
     : { ...props.style, color, fontSize };
