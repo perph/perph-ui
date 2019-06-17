@@ -11,7 +11,6 @@ export const ManagementListWrapper = styled.div`
 export const UtilityBarWrapper = styled.div`
   grid-area: utility;
   width: 100%;
-  background: gray;
 `;
 export const ListContent = styled.div`
   grid-area: content;
